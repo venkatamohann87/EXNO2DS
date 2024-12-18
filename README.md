@@ -30,56 +30,99 @@ STEP 8: Use heatmap method of representation to show relationships between two v
 ###### import numpy as np 
 ###### import matplotlib.pyplot as plt 
 ###### import seaborn as sns 
-###### df=pd.read_csv("titanic_dataset.csv") df
+###### df=pd.read_csv("titanic_dataset.csv")
+df
 
 
-![image](https://github.com/user-attachments/assets/98e56842-abd5-455e-ae73-eb4834eb64d9)
+![image](https://github.com/user-attachments/assets/04084b84-3011-47a9-b879-d576d5d0881b)
+```
+df.info
+```
+![image](https://github.com/user-attachments/assets/e8943f04-b630-4b31-8ec0-af6ded26fcf3)
+```
+df.shape
+```
+```
+(891,120
+```
+```
+df.nunique()
+```
+![image](https://github.com/user-attachments/assets/fe652ce2-b3c8-4bb6-a15e-03714170b2c3)
+```
+df['Survived'].value_counts()
+```
+![image](https://github.com/user-attachments/assets/0c7c5545-6f7c-4f24-b388-8d0673394853)
 
+```
+sns.countplot(data=df,x="Survived",hue="Survived")
+```
+![image](https://github.com/user-attachments/assets/986a580a-0f6f-4b3b-96a1-72a8835984ed)
 
-![image](https://github.com/user-attachments/assets/50032349-60bc-419f-af45-130af69b1ae9)
+```
+df
+```
+![image](https://github.com/user-attachments/assets/e4389549-de49-479b-9434-d4464b70d6a6)
+```
+df.Pclass.unique()
+```
+```
+array([3,1,2])
+```
+```
+df.rename(columns={'Sex':'Gender'},inplace=True)
+df
+```
+![image](https://github.com/user-attachments/assets/8306e4c1-b9a7-4745-8561-cf35d4083568)
 
+```
+sns.catplot(x="Gender",col='Survived',hue="Gender",kind="count",data=df,height=5,aspect=.7)
+```
+![image](https://github.com/user-attachments/assets/1c23e59c-6334-4af8-9b5e-8e8e9430fb44)
 
-![image](https://github.com/user-attachments/assets/6cce4aec-fa43-4333-a970-91a5372d2d3c)
+```
+sns.catplot(x="Survived",hue="Gender",data=df,kind="count")
+```
+![image](https://github.com/user-attachments/assets/c1b79060-70fd-40f0-9a12-8581dfafccf8)
 
+```
+df.boxplot(column="Age",by="Survived")
+```
+![image](https://github.com/user-attachments/assets/ddf82923-0360-4dfa-b20f-89d853f1769c)
 
-![image](https://github.com/user-attachments/assets/df385032-4915-4820-a48e-4cb15709fc2f)
+```
+sns.scatterplot(x=df["Age"],y=df["Fare"])
+```
+![image](https://github.com/user-attachments/assets/9083b01d-4320-47e5-b008-ea18fbd3cddb)
 
+```
+sns.jointplot(x="Age",y="Fare",data=df)
+```
+![image](https://github.com/user-attachments/assets/7016386a-1d4e-4813-8282-c72505d8031a)
 
+```
+fig, ax1 = plt.subplots(figsize=(8,5))
+plt = sns.boxplot(ax=ax1,x='Pclass',y='Age',hue='Gender',data=df)
+```
+![image](https://github.com/user-attachments/assets/2584c36a-eda3-49ad-9a75-d57c126cb08c)
+```
+sns.catplot(data=df,col="Survived",x="Gender",hue="Pclass",kind="count")
+```
+![image](https://github.com/user-attachments/assets/9c817d99-a843-4a80-8220-4af6516ab440)
 
-![image](https://github.com/user-attachments/assets/810fcf83-cf79-4e9c-85d1-6d4cd1e1d4f6)
+```
+ndf = df.select_dtypes(include='number')
+corr=ndf.corr()
+sns.heatmap(corr,annot=True)
+```
+![Uploading image.png…]()
 
+![image](https://github.com/user-attachments/assets/c9900242-80a4-44e7-892f-9b6f1a9c4e1d)
 
-![image](https://github.com/user-attachments/assets/a52dc437-e8be-4073-9f15-db9b98ab2bd6)
-
-
-![image](https://github.com/user-attachments/assets/9e6ce3c9-9149-42d7-ad53-63419deecc7d)
-
-
-![image](https://github.com/user-attachments/assets/67ca08ad-3255-4271-87fd-54085095c31a)
-
-
-
-![image](https://github.com/user-attachments/assets/df4fb336-5401-47aa-98ce-ac22eb86e8c5)
-
-
-![image](https://github.com/user-attachments/assets/53bfcc93-81f9-4ca2-8572-388688cbeb49)
-
-
-![image](https://github.com/user-attachments/assets/43a39edc-5011-48e6-8769-e5f3b27fc986)
-
-
-![image](https://github.com/user-attachments/assets/ccbe19b8-cc8d-4b04-9d5b-e09c43d03f30)
-
-
-
-![image](https://github.com/user-attachments/assets/c8286f89-21bd-4fd2-8b53-ab70021ccf00)
-
-
-![image](https://github.com/user-attachments/assets/e660c048-a27a-4581-beea-5030eb95247b)
-
-
-
-![image](https://github.com/user-attachments/assets/cb99c688-4685-4ecd-a2d3-c8304e15de3c)
+```
+sns.pairplot(df)
+```
+![image](https://github.com/user-attachments/assets/9be7d735-725c-402c-9b09-89806eff921c)
 
 
 
